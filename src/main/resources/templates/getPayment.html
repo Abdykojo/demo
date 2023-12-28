@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Form</title>
+    <link href="/css/payment.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Оправка платежа</h1>
+<form th:action="@{/api/v1/get}" th:object="${paymentRequest}" method="post">
+    <h2>Данные для получения платежа</h2>
+    <label for="code">Уникальный код:</label>
+    <input type="text" th:field="*{code}" id="code"pattern="[0-9]{6}" title="Код должен содержать 6 цифр">
+    <br>
+    <label for="phoneNumber">Номер телефона:</label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber" pattern="[0-9]{10}" title="Номер должен содержать 10 цифр">
+    <br>
+    <label for="cashBoxName">Филиал:</label>
+    <select th:field="*{cashBoxName}" id="cashBoxName">
+        <option value="">Выберите филиал</option>
+        <option value="ASIA">АЗИЯ</option>
+        <option value="BISHKEK">БИШКЕК</option>
+        <option value="ALMATY">АЛМАТА</option>
+    </select>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

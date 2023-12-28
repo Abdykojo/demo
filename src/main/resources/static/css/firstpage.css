@@ -1,0 +1,29 @@
+/* Стили для заголовка */
+h1 {
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для списка */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Стили для пунктов списка */
+li {
+    margin-bottom: 10px;
+}
+
+/* Стили для ссылок */
+a {
+    text-decoration: none;
+    color: #383838;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Стили для ссылок при наведении */
+a:hover {
+    color: #818181;
+}

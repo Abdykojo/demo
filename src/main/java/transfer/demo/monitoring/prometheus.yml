@@ -1,0 +1,14 @@
+#scrape_configs:
+#  - job_name: 'cash-box.service'
+#    metrics_path: '/actuator/prometheus'
+#    headers:
+#      accept: "application/openmetrics-text; version=0.0.1, `text/plain;version=0.0.4;q=0.5,*/*;q=0.1"
+#    scrape_interval: 3s
+#    static_configs:
+#      - targets: ['localhost:8081']
+#        labels:
+#          application: 'DemoApplication'
+#    scheme: http
+#    params:
+#      format: [prometheus]
+#      http_method: [GET]

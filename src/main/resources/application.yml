@@ -1,0 +1,38 @@
+  server:
+    port: 8081
+
+  spring:
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      url: jdbc:postgresql://localhost:5432/crud_db
+      password: kojo2301
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties.hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+    sql:
+      init:
+        mode: always
+
+  logging:
+    level:
+      org.springframework: ERROR
+      com.okaying: DEBUG
+    file.name: app.log
+    pattern.console: '%d{yyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n'
+
+  management:
+    endpoints:
+      enabled-by-default: true
+      web:
+        exposure:
+          include:
+            - health
+            - prometheus
+        cors:
+          allowed-origins: "*"
+          allowed-methods: GET

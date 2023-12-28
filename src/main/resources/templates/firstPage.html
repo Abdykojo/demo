@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/firstpage.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Главная страница</h1>
+<ul>
+    <li><a th:href="@{/api/v1/sendPayment}">Отправка платежа</a></li>
+    <li><a th:href="@{/api/v1/getPayment}">Получение платежа</a></li>
+    <li><a th:href="@{/api/v1/findTransactions}">Реестр</a></li>
+</ul>
+</body>
+</html>

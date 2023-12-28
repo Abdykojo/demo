@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kibana Response</title>
+    <link href="/css/findAll.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<h1>Реестр</h1>
+<div th:if="${transactionList.empty}">
+    <p>Ничего не найдено.</p>
+</div>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Сумма</th>
+        <th>Валюта</th>
+        <th>Дата</th>
+        <th>Номер отправителя</th>
+        <th>Номер получателя</th>
+        <th>Статус платежа</th>
+        <th>Филиал отправитель</th>
+        <th>Филиал получатель</th>
+    </tr>
+    <tr th:each="item, iterStat : ${transactionList}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${item.amount}"></td>
+        <td th:text="${item.currency}"></td>
+        <td th:text="${item.date}"></td>
+        <td th:text="${item.payerPhoneNumber}"></td>
+        <td th:text="${item.receiverPhoneNumber}"></td>
+        <td th:text="${item.status}"></td>
+        <td th:text="${item.receiveCashBoxId.name}"></td>
+        <td th:text="${item.sendCashBoxId.name}"></td>
+    </tr>
+</table>
+<button id="filterButton">Показать фильтры</button>
+
+<form th:action="@{/api/v1/filtering}" th:object="${filterRequest}" method="post" id="filterForm" style="display: none;">
+            <h2>Фильтр</h2>
+            <label for="status">Статус:</label>
+            <select th:field="*{status}" id="status">
+                <option value="">Статус</option>
+                <option value="ISSUED">Выданный</option>
+                <option value="CREATE">Созданный</option>
+            </select>
+            <br>
+            <label for="sendCashBoxName">Филиал получатель:</label>
+            <select th:field="*{sendCashBoxName}" id="sendCashBoxName">
+                <option value="">Выберите филиал</option>
+                <option value="ASIA">Азия</option>
+                <option value="BISHKEK">Бишкек</option>
+                <option value="ALMATY">Алматы</option>
+            </select>
+            <br>
+            <label for="receiveCashBoxName">Филиал отправки:</label>
+            <select th:field="*{receiveCashBoxName}" id="receiveCashBoxName">
+                <option value="">Выберите филиал</option>
+                <option value="ASIA">Азия</option>
+                <option value="BISHKEK">Бишкек</option>
+                <option value="ALMATY">Алматы</option>
+            </select>
+            <br>
+            <label for="currency">Валюта:</label>
+            <select th:field="*{currency}" id="currency">
+                <option value="">Выберите филиал</option>
+                <option value="KGS">Сом</option>
+                <option value="USD">Доллар</option>
+                <option value="RUB">Рубль</option>
+            </select>
+            <br>
+            <label for="startDate">Начало:</label>
+            <input type="datetime-local" th:field="*{startDate}" id="startDate" step="0.001"/>
+            <br>
+            <label for="endDate">Конец:</label>
+            <input type="datetime-local" th:field="*{endDate}" id="endDate" step="0.001"/>
+            <br>
+            <label for="pageNumber">Номер страницы:</label>
+            <input type="text" th:field="*{pageNumber}" id="pageNumber" />
+            <br>
+            <label for="pageSize">Количество данных:</label>
+            <input type="text" th:field="*{pageSize}" id="pageSize" />
+            <br>
+            <input type="submit" value="Применить фильтры">
+        </form>
+<script>
+    var filterForm = document.getElementById('filterForm');
+    var filterButton = document.getElementById('filterButton');
+    var isFilterFormVisible = false;
+
+    filterButton.addEventListener('click', function() {
+        if (isFilterFormVisible) {
+            filterForm.style.display = 'none';
+            isFilterFormVisible = false;
+        } else {
+            filterForm.style.display = 'block';
+            isFilterFormVisible = true;
+        }
+    });
+</script>
+
+<ul>
+    <li ><a class="ssc" th:href="@{/api/v1/firstPage}">Главная страница</a></li>
+</ul>
+</body>
+</html>

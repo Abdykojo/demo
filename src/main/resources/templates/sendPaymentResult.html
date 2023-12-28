@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Result</title>
+    <link href="/css/payment.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Результат</h1>
+
+<div th:object="${baseResponse}">
+    <p>Ваш уникальный код платежа: <span th:text="${baseResponse.code}"></span></p>
+</div>
+<ul>
+    <li ><a class="ssc" th:href="@{/api/v1/firstPage}">Главная страница</a></li>
+</ul>
+</body>
+</html>

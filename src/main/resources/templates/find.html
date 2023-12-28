@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Kibana Response</title>
+  <link href="/css/findAll.css" rel="stylesheet" type="text/css">
+  <script>
+    function validateForm() {
+      var typeSelect = document.getElementById("pageNumber");
+      var typeSelect1 = document.getElementById("pageSize");
+      if (typeSelect.value !== "0" && typeSelect1.value !== "0") {
+        return true;
+      } else {
+        alert("Не все данные заполнены");
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>Реестр</h1>
+
+<form th:action="@{/api/v1/filtering}" th:object="${filterRequest}" method="post" onsubmit="return validateForm()">
+  <h2>Выберите параметры</h2>
+  <label for="status">Статус:</label>
+  <select th:field="*{status}" id="status">
+    <option value="">Статус</option>
+    <option value="ISSUED">Выданный</option>
+    <option value="CREATE">Созданный</option>
+  </select>
+  <br>
+  <label for="sendCashBoxName">Филиал получатель:</label>
+  <select th:field="*{sendCashBoxName}" id="sendCashBoxName">
+    <option value="">Выберите филиал</option>
+    <option value="ASIA">Азия</option>
+    <option value="BISHKEK">Бишкек</option>
+    <option value="ALMATY">Алматы</option>
+  </select>
+  <br>
+  <label for="receiveCashBoxName">Филиал отправки:</label>
+  <select th:field="*{receiveCashBoxName}" id="receiveCashBoxName">
+    <option value="">Выберите филиал</option>
+    <option value="ASIA">Азия</option>
+    <option value="BISHKEK">Бишкек</option>
+    <option value="ALMATY">Алматы</option>
+  </select>
+  <br>
+  <label for="currency">Валюта:</label>
+  <select th:field="*{currency}" id="currency">
+    <option value="">Выберите филиал</option>
+    <option value="KGS">Сом</option>
+    <option value="USD">Доллар</option>
+    <option value="RUB">Рубль</option>
+  </select>
+  <br>
+  <label for="startDate">Начало:</label>
+  <input type="datetime-local" th:field="*{startDate}" id="startDate" step="0.001"/>
+  <br>
+  <label for="endDate">Конец:</label>
+  <input type="datetime-local" th:field="*{endDate}" id="endDate" step="0.001"/>
+  <br>
+  <label for="pageNumber">Номер страницы:</label>
+  <input type="text" th:field="*{pageNumber}" id="pageNumber" />
+  <br>
+  <label for="pageSize">Количество данных:</label>
+  <input type="text" th:field="*{pageSize}" id="pageSize" />
+  <br>
+  <input type="submit" value="Submit">
+</form>
+<ul>
+  <li ><a class="ssc" th:href="@{/api/v1/firstPage}">Главная страница</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* Стили для заголовка */
+h1 {
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для формы */
+form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+/* Стили для заголовка формы */
+h2 {
+    color: #555;
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для меток */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Стили для текстовых полей */
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Стили для кнопки отправки */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Стили для кнопки отправки при наведении */
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

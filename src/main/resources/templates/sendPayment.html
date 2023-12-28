@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Form</title>
+    <link href="/css/payment.css" rel="stylesheet" type="text/css">
+    <script>
+        function validateForm() {
+            var typeSelect = document.getElementById("receiveCashBox");
+            if (typeSelect.value === "") {
+                alert("Не все данные заполнены");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<h1>Оправка платежа</h1>
+<form th:action="@{/api/v1/check}" th:object="${globalRequest}" method="post" onsubmit="return validateForm()">
+    <h2>Данные отправителя</h2>
+    <label for="payerName">Имя:</label>
+    <input type="text" th:field="*{payerRequest.name}" id="payerName" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="payerLastname">Фамилия:</label>
+    <input type="text" th:field="*{payerRequest.lastname}" id="payerLastname" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="payerSurname">Отчество:</label>
+    <input type="text" th:field="*{payerRequest.surname}" id="payerSurname" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="payerPhoneNumber">Номер телефона:</label>
+    <input type="text" th:field="*{payerRequest.phoneNumber}" id="payerPhoneNumber" pattern="[0-9]{10}" title="Номер должен содержать 10 цифр">
+    <br>
+
+    <h2>Данные получателя</h2>
+    <label for="receiverName">Имя:</label>
+    <input type="text" th:field="*{receiverRequest.name}" id="receiverName" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="receiverLastname">Фамилия:</label>
+    <input type="text" th:field="*{receiverRequest.lastname}"  id="receiverLastname" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="receiverSurname">Отчество:</label>
+    <input type="text" th:field="*{receiverRequest.surname}" id="receiverSurname" pattern="[A-Z][a-z]*" title="Заполните данные правильно">
+    <br>
+    <label for="receiverPhoneNumber">Номер телефона:</label>
+    <input type="text" th:field="*{receiverRequest.phoneNumber}" id="receiverPhoneNumber" pattern="[0-9]{10}" title="Номер должен содержать 10 цифр">
+    <br>
+
+    <h2>Данные платежа</h2>
+    <label for="amount">Сумма:</label>
+    <input type="text" th:field="*{transactionRequest.amount}" id="amount">
+    <br>
+    <label for="currency">Валюта:</label>
+    <select th:field="*{transactionRequest.currency}" id="currency">
+        <option value="">Выберите валюту</option>
+        <option value="KGS">KGS</option>
+        <option value="RUB">RUB</option>
+        <option value="USD">USD</option>
+    </select>
+    <br>
+    <label for="sendCashBox">Филиал отправителя:</label>
+    <select th:field="*{transactionRequest.sendCashBox}" id="sendCashBox">
+        <option value="">Выберите филиал</option>
+        <option value="ASIA">АЗИЯ</option>
+        <option value="BISHKEK">БИШКЕК</option>
+        <option value="ALMATY">АЛМАТА</option>
+    </select>
+    <br>
+    <label for="receiveCashBox">Филиал получателя:</label>
+    <select th:field="*{transactionRequest.receiveCashBox}" id="receiveCashBox">
+        <option value="">Выберите филиал</option>
+        <option value="ASIA">АЗИЯ</option>
+        <option value="BISHKEK">БИШКЕК</option>
+        <option value="ALMATY">АЛМАТА</option>
+    </select>
+    <br>
+    <label for="comment">Комментарий:</label>
+    <input type="text" th:field="*{transactionRequest.comment}" id="comment"><br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
